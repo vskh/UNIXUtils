@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using CommandLine;
 
 namespace Khondar.UNIXUtils.Concat
 {
@@ -12,7 +10,7 @@ namespace Khondar.UNIXUtils.Concat
         private static void Main(string[] args)
         {
             var options = new Options();
-            if (CommandLine.Parser.Default.ParseArguments(args, options))
+            if (Parser.Default.ParseArguments(args, options))
             {
                 if (options.Version)
                 {
@@ -52,18 +50,18 @@ namespace Khondar.UNIXUtils.Concat
 
         private static void DisplayFile(string fileName, Options opts)
         {
-            FileInfo file = new FileInfo(fileName);
+            var file = new FileInfo(fileName);
             TextReader input = null;
-            TextWriter output = Console.Out;
+            var output = Console.Out;
             long lineNo = 0;
             try
             {
                 input = file.OpenText();
-                bool squeezed = false;
+                var squeezed = false;
                 string buf;
                 while ((buf = input.ReadLine()) != null)
                 {
-                    if (squeezed && buf.Length == 0)
+                    if (opts.SqueezeBlanks && squeezed && buf.Length == 0)
                     {
                         continue;
                     }
@@ -75,6 +73,57 @@ namespace Khondar.UNIXUtils.Concat
                         buf = buf.Replace("\t", "^I");
                     }
 
+                    if (opts.ShowEnds)
+                    {
+                        buf += "$";
+                    }
+
+                    if (opts.ShowNonPrinting)
+                    {
+                        var sb = new StringBuilder();
+
+                        // logic for non-printables translated from http://git.savannah.gnu.org/cgit/coreutils.git/tree/src/cat.c
+                        foreach (var c in buf)
+                        {
+                            if (c < 32)
+                            {
+                                sb.Append($"^{(char) (c + 64)}");
+                            }
+                            else
+                            {
+                                if (c < 127)
+                                {
+                                    sb.Append(c);
+                                }
+                                else if (c == 127)
+                                {
+                                    sb.Append("^?");
+                                }
+                                else
+                                {
+                                    sb.Append("M-");
+                                    if (c >= 128 + 32)
+                                    {
+                                        if (c < 128 + 127)
+                                        {
+                                            sb.Append((char) (c - 127));
+                                        }
+                                        else
+                                        {
+                                            sb.Append("^?");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        sb.Append($"^{(char) (c - 128 + 64)}");
+                                    }
+                                }
+                            }
+                        }
+
+                        buf = sb.ToString();
+                    }
+
                     if (opts.NumberAll)
                     {
                         if (!opts.NumberNonEmptyLines || buf.Length != 0)
@@ -82,10 +131,6 @@ namespace Khondar.UNIXUtils.Concat
                             ++lineNo;
                             buf = $"{lineNo,6:d}\t{buf}";
                         }
-                    }
-                    if (opts.ShowEnds)
-                    {
-                        buf += "$";
                     }
 
                     output.WriteLine(buf);
