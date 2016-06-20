@@ -40,6 +40,9 @@ namespace Khondar.UNIXUtils.Concat
         [Option('v', "show-nonprinting", HelpText = "use ^ and M- notation, except for LFD and TAB")]
         public bool ShowNonPrinting { get; set; }
 
+        [ValueList(typeof(List<string>))]
+        public List<string> FileNames { get; set; }
+
         [HelpOption]
         public string GetUsage()
         {
