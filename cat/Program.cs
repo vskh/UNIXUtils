@@ -48,12 +48,20 @@ namespace Khondar.UNIXUtils.Concat
         private static void DisplayFile(string fileName, Options opts)
         {
             FileInfo file = new FileInfo(fileName);
-            Stream input = null, output = null;
+            TextReader input = null;
+            TextWriter output = Console.Out;
             try
             {
-                input = file.OpenRead();
-                output = Console.OpenStandardOutput(2048);
-                input.CopyTo(output);
+                input = file.OpenText();
+                string buf;
+                while ((buf = input.ReadLine()) != null)
+                {
+                    if (opts.ShowEnds)
+                    {
+                        buf += "$";
+                    }
+                    output.WriteLine(buf);
+                }
             }
             catch (IOException ex)
             {
