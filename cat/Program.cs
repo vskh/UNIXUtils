@@ -59,13 +59,22 @@ namespace Khondar.UNIXUtils.Concat
             try
             {
                 input = file.OpenText();
+                bool squeezed = false;
                 string buf;
                 while ((buf = input.ReadLine()) != null)
                 {
+                    if (squeezed && buf.Length == 0)
+                    {
+                        continue;
+                    }
+
+                    squeezed = buf.Length == 0;
+
                     if (opts.ShowTabs)
                     {
                         buf = buf.Replace("\t", "^I");
                     }
+
                     if (opts.NumberAll)
                     {
                         if (!opts.NumberNonEmptyLines || buf.Length != 0)
@@ -78,6 +87,7 @@ namespace Khondar.UNIXUtils.Concat
                     {
                         buf += "$";
                     }
+
                     output.WriteLine(buf);
                 }
             }
