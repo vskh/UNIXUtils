@@ -20,6 +20,11 @@ namespace Khondar.UNIXUtils.Concat
                     Console.WriteLine(assemblyInfo.Name + " v" + assemblyInfo.Version);
                 }
 
+                if (options.NumberNonEmptyLines)
+                {
+                    options.NumberAll = true;
+                }
+
                 if (options.ShowAll)
                 {
                     options.ShowNonPrintingWithEnds = true;
@@ -50,6 +55,7 @@ namespace Khondar.UNIXUtils.Concat
             FileInfo file = new FileInfo(fileName);
             TextReader input = null;
             TextWriter output = Console.Out;
+            long lineNo = 0;
             try
             {
                 input = file.OpenText();
@@ -59,6 +65,14 @@ namespace Khondar.UNIXUtils.Concat
                     if (opts.ShowTabs)
                     {
                         buf = buf.Replace("\t", "^I");
+                    }
+                    if (opts.NumberAll)
+                    {
+                        if (!opts.NumberNonEmptyLines || buf.Length != 0)
+                        {
+                            ++lineNo;
+                            buf = $"{lineNo,6:d}\t{buf}";
+                        }
                     }
                     if (opts.ShowEnds)
                     {
@@ -70,7 +84,7 @@ namespace Khondar.UNIXUtils.Concat
             catch (IOException ex)
             {
                 Console.WriteLine();
-                Console.WriteLine("cat: {0}: {1}", fileName, ex.Message);
+                Console.WriteLine($"cat: {fileName}: {ex.Message}");
             }
             finally
             {
