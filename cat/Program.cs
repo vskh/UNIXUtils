@@ -56,6 +56,10 @@ namespace Khondar.UNIXUtils.Concat
                 string buf;
                 while ((buf = input.ReadLine()) != null)
                 {
+                    if (opts.ShowTabs)
+                    {
+                        buf = buf.Replace("\t", "^I");
+                    }
                     if (opts.ShowEnds)
                     {
                         buf += "$";
