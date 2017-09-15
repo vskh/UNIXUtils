@@ -9,6 +9,25 @@ namespace Khondar.UNIXUtils.Concat
     {
         private static void Main(string[] args)
         {
+            var options = ParseOptions(args);
+            if (options != null)
+            {
+                if (options.FileNames.Count > 0)
+                {
+                    foreach (var fileName in options.FileNames)
+                    {
+                        ToConsole(FromFile(fileName), options);
+                    }
+                }
+                else
+                {
+                    ToConsole(FromConsole(), options);
+                }
+            }
+        }
+
+        private static Options ParseOptions(string[] args)
+        {
             var options = new Options();
             if (Parser.Default.ParseArguments(args, options))
             {
@@ -41,22 +60,30 @@ namespace Khondar.UNIXUtils.Concat
                     options.ShowTabs = true;
                 }
 
-                foreach (var fileName in options.FileNames)
-                {
-                    DisplayFile(fileName, options);
-                }
+                return options;
             }
-        }
 
-        private static void DisplayFile(string fileName, Options opts)
+            return null;
+        }
+        
+        private static Source FromFile(string fileName)
         {
             var file = new FileInfo(fileName);
-            TextReader input = null;
+            return new Source(fileName, file.OpenText());
+        }
+
+        private static Source FromConsole()
+        {
+            return new Source("<console>", Console.In);
+        }
+        
+        private static void ToConsole(Source source, Options opts)
+        {
+            var input = source.Reader;
             var output = Console.Out;
             long lineNo = 0;
             try
             {
-                input = file.OpenText();
                 var squeezed = false;
                 string buf;
                 while ((buf = input.ReadLine()) != null)
@@ -139,7 +166,7 @@ namespace Khondar.UNIXUtils.Concat
             catch (IOException ex)
             {
                 Console.WriteLine();
-                Console.WriteLine($"cat: {fileName}: {ex.Message}");
+                Console.WriteLine($"cat: {source.Description}:{lineNo}: {ex.Message}");
             }
             finally
             {
