@@ -9,7 +9,6 @@ namespace Khondar.UNIXUtils.MakeDirectory
             var options = new Options();
             if (Parser.Default.ParseArguments(args, options))
             {
-                
             }
         }
     }

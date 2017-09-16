@@ -11,19 +11,11 @@ namespace Khondar.UNIXUtils.Concat
         {
             var options = ParseOptions(args);
             if (options != null)
-            {
                 if (options.FileNames.Count > 0)
-                {
                     foreach (var fileName in options.FileNames)
-                    {
                         ToConsole(FromFile(fileName), options);
-                    }
-                }
                 else
-                {
                     ToConsole(FromConsole(), options);
-                }
-            }
         }
 
         private static Options ParseOptions(string[] args)
@@ -38,9 +30,7 @@ namespace Khondar.UNIXUtils.Concat
                 }
 
                 if (options.NumberNonEmptyLines)
-                {
                     options.NumberAll = true;
-                }
 
                 if (options.ShowAll)
                 {
@@ -65,7 +55,7 @@ namespace Khondar.UNIXUtils.Concat
 
             return null;
         }
-        
+
         private static Source FromFile(string fileName)
         {
             var file = new FileInfo(fileName);
@@ -76,7 +66,7 @@ namespace Khondar.UNIXUtils.Concat
         {
             return new Source("<console>", Console.In);
         }
-        
+
         private static void ToConsole(Source source, Options opts)
         {
             var input = source.Reader;
@@ -89,21 +79,15 @@ namespace Khondar.UNIXUtils.Concat
                 while ((buf = input.ReadLine()) != null)
                 {
                     if (opts.SqueezeBlanks && squeezed && buf.Length == 0)
-                    {
                         continue;
-                    }
 
                     squeezed = buf.Length == 0;
 
                     if (opts.ShowTabs)
-                    {
                         buf = buf.Replace("\t", "^I");
-                    }
 
                     if (opts.ShowEnds)
-                    {
                         buf += "$";
-                    }
 
                     if (opts.ShowNonPrinting)
                     {
@@ -111,7 +95,6 @@ namespace Khondar.UNIXUtils.Concat
 
                         // logic for non-printables translated from http://git.savannah.gnu.org/cgit/coreutils.git/tree/src/cat.c
                         foreach (var c in buf)
-                        {
                             if (c < 32)
                             {
                                 sb.Append($"^{(char) (c + 64)}");
@@ -130,35 +113,24 @@ namespace Khondar.UNIXUtils.Concat
                                 {
                                     sb.Append("M-");
                                     if (c >= 128 + 32)
-                                    {
                                         if (c < 128 + 127)
-                                        {
                                             sb.Append((char) (c - 127));
-                                        }
                                         else
-                                        {
                                             sb.Append("^?");
-                                        }
-                                    }
                                     else
-                                    {
                                         sb.Append($"^{(char) (c - 128 + 64)}");
-                                    }
                                 }
                             }
-                        }
 
                         buf = sb.ToString();
                     }
 
                     if (opts.NumberAll)
-                    {
                         if (!opts.NumberNonEmptyLines || buf.Length != 0)
                         {
                             ++lineNo;
                             buf = $"{lineNo,6:d}\t{buf}";
                         }
-                    }
 
                     output.WriteLine(buf);
                 }

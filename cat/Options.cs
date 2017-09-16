@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using CommandLine;
 using CommandLine.Text;
 
@@ -47,7 +43,7 @@ namespace Khondar.UNIXUtils.Concat
         public string GetUsage()
         {
             return HelpText.AutoBuild(this,
-              (HelpText current) => HelpText.DefaultParsingErrorsHandler(this, current));
+                current => HelpText.DefaultParsingErrorsHandler(this, current));
         }
     }
 }
