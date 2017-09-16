@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cat", "cat\cat.csproj", "{8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mkdir", "mkdir\mkdir.csproj", "{2DB3720A-0936-40B4-9C11-529403B2B602}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{871DD378-13F6-4F38-9ACD-10AE860940BA}"
+ProjectSection(SolutionItems) = preProject
+	.gitignore = .gitignore
+	.gitattributes = .gitattributes
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
