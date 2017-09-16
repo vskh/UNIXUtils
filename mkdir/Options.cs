@@ -5,7 +5,7 @@ namespace Khondar.UNIXUtils.MakeDirectory
 {
 	internal class Options
 	{
-		[Option('m', "mode", HelpText = "set file mode (as in chmod), not a=rwx - umask")]
+		[Option('m', "mode", HelpText = "set file mode (as in chmod)")]
 		public string Mode { get; set; }
 
 		[Option('p', "parents", HelpText = "no error if existing, make parent directories as needed")]
@@ -17,6 +17,7 @@ namespace Khondar.UNIXUtils.MakeDirectory
 		[Option('V', "version", HelpText = "output version information and exit")]
 		public bool Version { get; set; }
 
+		[HelpOption]
 		public string GetUsage()
 		{
 			return HelpText.AutoBuild(this,
