@@ -1,2 +1,3 @@
 # Travis CI configuration file.
-language: c#
+language: csharp
+solution: UNIXUtils.sln
