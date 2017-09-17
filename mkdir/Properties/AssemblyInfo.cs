@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using CommandLine;
 
 [assembly: AssemblyTitle("mkdir")]
-[assembly: AssemblyDescription("Create directories")]
+[assembly: AssemblyDescription("Create directories if they do not exist yet.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("khondar.name")]
 [assembly: AssemblyProduct("mkdir")]
@@ -14,8 +14,7 @@ using CommandLine;
 [assembly: AssemblyLicense("This is free software." +
                            " You may redistribute copies of it under the terms of the MIT License" +
                            " <http://www.opensource.org/licenses/mit-license.php>.\n")]
-[assembly: AssemblyUsage("Usage: mkdir [options]... [directories]...\n" +
-                         "Create directories if they do not exist yet.")]
+[assembly: AssemblyUsage("Usage: mkdir [options]... [directories]...")]
 
 [assembly: ComVisible(false)]
 [assembly: Guid("2db3720a-0936-40b4-9c11-529403b2b602")]

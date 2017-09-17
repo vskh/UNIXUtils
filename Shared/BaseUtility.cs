@@ -12,16 +12,16 @@ namespace Khondar.UNIXUtils.Shared
 			TOptions options = ParseOptions(args);
 			if (options != null)
 			{
+				if (options.Debug)
+				{
+					Console.WriteLine($"Invoked with options: {options}");
+				}
+				
 				if (options.Version)
 				{
 					AssemblyName assemblyInfo = GetType().Assembly.GetName();
 					Console.WriteLine(assemblyInfo.Name + " v" + assemblyInfo.Version);
 					return;
-				}
-
-				if (options.Debug)
-				{
-					Console.WriteLine($"Invoked with options: {options}");
 				}
 
 				Run(options);
@@ -34,7 +34,7 @@ namespace Khondar.UNIXUtils.Shared
 		{
 			var options = new TOptions();
 			var parser = new Parser(options.ParserSettings);
-
+			
 			if (parser.ParseArgumentsStrict(args, options))
 			{
 				return ParseOptions(options);

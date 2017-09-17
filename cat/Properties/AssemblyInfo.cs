@@ -3,7 +3,8 @@ using System.Runtime.InteropServices;
 using CommandLine;
 
 [assembly: AssemblyTitle("cat")]
-[assembly: AssemblyDescription("Concatenate files and print result to console")]
+[assembly: AssemblyDescription("Concatenate given files (or take content of stardard input if none given)" +
+                               " and print it to console.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("khondar.name")]
 [assembly: AssemblyProduct("cat")]
@@ -14,9 +15,7 @@ using CommandLine;
 [assembly: AssemblyLicense("This is free software." +
                            " You may redistribute copies of it under the terms of the MIT License" +
                            " <http://www.opensource.org/licenses/mit-license.php>.\n")]
-[assembly: AssemblyUsage("Usage: cat [options]... [files]...\n" +
-                         "Concatenate given files (or take content of stardard input if none given)" +
-                         " and print it to console.")]
+[assembly: AssemblyUsage("Usage: cat [options]... [files]...")]
 
 [assembly: ComVisible(false)]
 [assembly: Guid("89db8a7b-7352-4a19-9868-13da7276a553")]
