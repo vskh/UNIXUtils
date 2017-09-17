@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using Khondar.UNIXUtils.Shared;
 
-namespace Khondar.UNIXUtilities.Kill
+namespace Khondar.UNIXUtils.Kill
 {
 	internal class Program : BaseUtility<Options>
 	{

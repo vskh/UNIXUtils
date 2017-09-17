@@ -19,6 +19,11 @@ namespace Khondar.UNIXUtils.Shared
 					return;
 				}
 
+				if (options.Debug)
+				{
+					Console.WriteLine($"Invoked with options: {options}");
+				}
+
 				Run(options);
 			}
 		}

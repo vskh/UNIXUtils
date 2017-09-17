@@ -2,7 +2,7 @@
 using CommandLine;
 using Khondar.UNIXUtils.Shared;
 
-namespace Khondar.UNIXUtilities.Kill
+namespace Khondar.UNIXUtils.Kill
 {
 	public class Options : BaseOptions
 	{
