@@ -1,85 +1,72 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using CommandLine;
+using Khondar.UNIXUtils.Shared;
 
 namespace Khondar.UNIXUtils.Concat
 {
-	internal class Program
+	internal class Program : BaseUtility<Options>
 	{
 		private static void Main(string[] args)
 		{
-			var options = ParseOptions(args);
-			if (options != null)
-			{
-				if (options.Version)
-				{
-					var assemblyInfo = typeof(Program).Assembly.GetName();
-					Console.WriteLine(assemblyInfo.Name + " v" + assemblyInfo.Version);
-					return;
-				}				
-				
-				if (options.FileNames.Count > 0)
-				{
-					foreach (var fileName in options.FileNames)
-					{
-						ToConsole(FromFile(fileName), options);
-					}
-				}
-				else
-				{
-					ToConsole(FromConsole(), options);
-				}
-			}
+			new Program().Run(args);
 		}
 
-		private static Options ParseOptions(string[] args)
+		protected override void Run(Options options)
 		{
-			var options = new Options();
-			Parser parser = new Parser(options.ParserSettings);
-			if (parser.ParseArguments(args, options))
+			if (options.FileNames.Count > 0)
 			{
-				if (options.NumberNonEmptyLines)
+				foreach (var fileName in options.FileNames)
 				{
-					options.NumberAll = true;
+					ToConsole(FromFile(fileName), options);
 				}
-
-				if (options.ShowAll)
-				{
-					options.ShowNonPrintingWithEnds = true;
-					options.ShowNonPrintingWithTabs = true;
-				}
-
-				if (options.ShowNonPrintingWithEnds)
-				{
-					options.ShowNonPrinting = true;
-					options.ShowEnds = true;
-				}
-
-				if (options.ShowNonPrintingWithTabs)
-				{
-					options.ShowNonPrinting = true;
-					options.ShowTabs = true;
-				}
-
-				return options;
 			}
-
-			return null;
+			else
+			{
+				ToConsole(FromConsole(), options);
+			}
 		}
 
-		private static Source FromFile(string fileName)
+		protected override Options ParseOptions(Options options)
+		{
+			if (options.NumberNonEmptyLines)
+			{
+				options.NumberAll = true;
+			}
+
+			if (options.ShowAll)
+			{
+				options.ShowNonPrintingWithEnds = true;
+				options.ShowNonPrintingWithTabs = true;
+			}
+
+			if (options.ShowNonPrintingWithEnds)
+			{
+				options.ShowNonPrinting = true;
+				options.ShowEnds = true;
+			}
+
+			if (options.ShowNonPrintingWithTabs)
+			{
+				options.ShowNonPrinting = true;
+				options.ShowTabs = true;
+			}
+
+			return options;
+		}
+
+		private Source FromFile(string fileName)
 		{
 			var file = new FileInfo(fileName);
 			return new Source(fileName, file.OpenText());
 		}
 
-		private static Source FromConsole()
+		private Source FromConsole()
 		{
 			return new Source("<console>", Console.In);
 		}
 
-		private static void ToConsole(Source source, Options opts)
+		private void ToConsole(Source source, Options opts)
 		{
 			var input = source.Reader;
 			var output = Console.Out;

@@ -6,9 +6,6 @@ namespace Khondar.UNIXUtils.Concat
 {
 	internal class Options : BaseOptions
 	{
-		[Option('V', "version", HelpText = "output version information and exit")]
-		public bool Version { get; set; }
-
 		[Option('A', "show-all", HelpText = "equivalent to -vET")]
 		public bool ShowAll { get; set; }
 
