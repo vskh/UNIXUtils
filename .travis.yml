@@ -1,1 +1,2 @@
 # Travis CI configuration file.
+language: c#
