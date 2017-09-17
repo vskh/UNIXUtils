@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Khondar.UNIXUtils.Shared
+namespace vskh.UNIXUtils.Shared
 {
 	public static class AssemblyExtensions
 	{

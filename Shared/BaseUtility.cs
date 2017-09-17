@@ -2,7 +2,7 @@
 using System.Reflection;
 using CommandLine;
 
-namespace Khondar.UNIXUtils.Shared
+namespace vskh.UNIXUtils.Shared
 {
 	public abstract class BaseUtility<TOptions>
 		where TOptions : BaseOptions, new()

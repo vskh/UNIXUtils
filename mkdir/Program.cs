@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
-using Khondar.UNIXUtils.Shared;
+using vskh.UNIXUtils.Shared;
 
-namespace Khondar.UNIXUtils.MakeDirectory
+namespace vskh.UNIXUtils.MakeDirectory
 {
 	internal class Program : BaseUtility<Options>
 	{

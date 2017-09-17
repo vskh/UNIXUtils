@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using CommandLine;
-using Khondar.UNIXUtils.Shared;
+using vskh.UNIXUtils.Shared;
 
-namespace Khondar.UNIXUtils.Concat
+namespace vskh.UNIXUtils.Concat
 {
 	internal class Options : BaseOptions
 	{

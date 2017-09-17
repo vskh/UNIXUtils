@@ -4,7 +4,7 @@ using System.Reflection;
 using CommandLine;
 using CommandLine.Text;
 
-namespace Khondar.UNIXUtils.Shared
+namespace vskh.UNIXUtils.Shared
 {
 	public class BaseOptions
 	{

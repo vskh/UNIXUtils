@@ -7,8 +7,8 @@
     <ProjectGuid>{89DB8A7B-7352-4A19-9868-13DA7276A553}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Khondar.UNIXUtils.Concat</RootNamespace>
-    <AssemblyName>Khondar.UNIXUtils.Concat</AssemblyName>
+    <RootNamespace>vskh.UNIXUtils.Concat</RootNamespace>
+    <AssemblyName>vskh.UNIXUtils.Concat</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

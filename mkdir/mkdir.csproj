@@ -7,8 +7,8 @@
     <ProjectGuid>{2DB3720A-0936-40B4-9C11-529403B2B602}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Khondar.UNIXUtils.MakeDirectory</RootNamespace>
-    <AssemblyName>Khondar.UNIXUtils.MakeDirectory</AssemblyName>
+    <RootNamespace>vskh.UNIXUtils.MakeDirectory</RootNamespace>
+    <AssemblyName>vskh.UNIXUtils.MakeDirectory</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

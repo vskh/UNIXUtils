@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using Khondar.UNIXUtils.Shared;
+using vskh.UNIXUtils.Shared;
 
-namespace Khondar.UNIXUtils.Concat
+namespace vskh.UNIXUtils.Concat
 {
 	internal class Program : BaseUtility<Options>
 	{

@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Khondar.UNIXUtils.Concat
+namespace vskh.UNIXUtils.Concat
 {
 	public struct Source
 	{

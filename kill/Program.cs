@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
-using Khondar.UNIXUtils.Shared;
+using vskh.UNIXUtils.Shared;
 
-namespace Khondar.UNIXUtils.Kill
+namespace vskh.UNIXUtils.Kill
 {
 	internal class Program : BaseUtility<Options>
 	{
