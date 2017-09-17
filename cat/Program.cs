@@ -11,12 +11,12 @@ namespace Khondar.UNIXUtils.Concat
 		{
 			new Program().Run(args);
 		}
-		
+
 		protected override void Run(Options options)
 		{
 			if (options.FileNames.Count > 0)
 			{
-				foreach (var fileName in options.FileNames)
+				foreach (string fileName in options.FileNames)
 				{
 					ToConsole(FromFile(fileName), options);
 				}
@@ -68,8 +68,8 @@ namespace Khondar.UNIXUtils.Concat
 
 		private void ToConsole(Source source, Options opts)
 		{
-			var input = source.Reader;
-			var output = Console.Out;
+			TextReader input = source.Reader;
+			TextWriter output = Console.Out;
 			long lineNo = 0;
 			try
 			{
@@ -99,7 +99,7 @@ namespace Khondar.UNIXUtils.Concat
 						var sb = new StringBuilder();
 
 						// logic for non-printables translated from http://git.savannah.gnu.org/cgit/coreutils.git/tree/src/cat.c
-						foreach (var c in buf)
+						foreach (char c in buf)
 						{
 							if (c < 32)
 							{

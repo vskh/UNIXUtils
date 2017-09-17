@@ -20,7 +20,7 @@ namespace Khondar.UNIXUtils.Shared
 
 		[Option('V', "version", HelpText = "output version information and exit")]
 		public bool Version { get; set; }
-		
+
 		[HelpOption]
 		public string GetUsage()
 		{

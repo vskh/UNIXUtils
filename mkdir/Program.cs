@@ -15,19 +15,20 @@ namespace Khondar.UNIXUtils.MakeDirectory
 		{
 			if (options.DirectoryNames.Count > 0)
 			{
-				foreach (var directory in options.DirectoryNames)
+				foreach (string directory in options.DirectoryNames)
 				{
 					if (File.Exists(directory) || Directory.Exists(directory))
 					{
 						Console.WriteLine($"mkdir: Could not create directory '{directory}': File exists");
-					} else if (!Directory.Exists(directory))
+					}
+					else if (!Directory.Exists(directory))
 					{
 						try
 						{
 							if (options.Parents || Directory.GetParent(directory).Exists)
 							{
 								Directory.CreateDirectory(directory);
-								
+
 								if (options.Verbose)
 								{
 									Console.WriteLine($"mkdir: Creating directory '{directory}'");

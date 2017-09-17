@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using CommandLine;
 
 namespace Khondar.UNIXUtils.Shared
@@ -8,22 +9,22 @@ namespace Khondar.UNIXUtils.Shared
 	{
 		public void Run(string[] args)
 		{
-			var options = ParseOptions(args);
+			TOptions options = ParseOptions(args);
 			if (options != null)
 			{
 				if (options.Version)
 				{
-					var assemblyInfo = GetType().Assembly.GetName();
+					AssemblyName assemblyInfo = GetType().Assembly.GetName();
 					Console.WriteLine(assemblyInfo.Name + " v" + assemblyInfo.Version);
 					return;
 				}
-				
+
 				Run(options);
 			}
 		}
-		
+
 		protected abstract void Run(TOptions options);
-		
+
 		protected TOptions ParseOptions(string[] args)
 		{
 			var options = new TOptions();

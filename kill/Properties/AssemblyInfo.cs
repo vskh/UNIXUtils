@@ -2,11 +2,11 @@
 using System.Runtime.InteropServices;
 using CommandLine;
 
-[assembly: AssemblyTitle("cat")]
-[assembly: AssemblyDescription("Concatenate files and print result to console")]
+[assembly: AssemblyTitle("kill")]
+[assembly: AssemblyDescription("End process by PID or process name")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("khondar.name")]
-[assembly: AssemblyProduct("cat")]
+[assembly: AssemblyProduct("kill")]
 [assembly: AssemblyCopyright("Copyright © 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -14,12 +14,11 @@ using CommandLine;
 [assembly: AssemblyLicense("This is free software." +
                            " You may redistribute copies of it under the terms of the MIT License" +
                            " <http://www.opensource.org/licenses/mit-license.php>.\n")]
-[assembly: AssemblyUsage("Usage: cat [options]... [files]...\n" +
-                         "Concatenate given files (or take content of stardard input if none given)" +
-                         " and print it to console.")]
+[assembly: AssemblyUsage("Usage: kill [options]... [pids|process names]...\n" +
+                         "Ends processes by PIDs or names")]
 
 [assembly: ComVisible(false)]
-[assembly: Guid("89db8a7b-7352-4a19-9868-13da7276a553")]
+[assembly: Guid("27B38C41-0589-4500-A79F-F36AE0540EDE")]
 
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
