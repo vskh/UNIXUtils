@@ -37,6 +37,9 @@ namespace Khondar.UNIXUtils.Shared
 			return null;
 		}
 
-		protected abstract TOptions ParseOptions(TOptions options);
+		protected virtual TOptions ParseOptions(TOptions options)
+		{
+			return options;
+		}
 	}
 }

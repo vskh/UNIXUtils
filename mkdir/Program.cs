@@ -1,25 +1,55 @@
-﻿using CommandLine;
+﻿using System;
+using System.IO;
+using Khondar.UNIXUtils.Shared;
 
 namespace Khondar.UNIXUtils.MakeDirectory
 {
-	internal class Program
+	internal class Program : BaseUtility<Options>
 	{
 		private static void Main(string[] args)
 		{
-			var options = ParseOptions(args);
-			
-			
+			new Program().Run(args);
 		}
 
-		private static Options ParseOptions(string[] args)
+		protected override void Run(Options options)
 		{
-			var options = new Options();
-			if (Parser.Default.ParseArguments(args, options))
+			if (options.DirectoryNames.Count > 0)
 			{
-				return options;
+				foreach (var directory in options.DirectoryNames)
+				{
+					if (File.Exists(directory) || Directory.Exists(directory))
+					{
+						Console.WriteLine($"mkdir: Could not create directory '{directory}': File exists");
+					} else if (!Directory.Exists(directory))
+					{
+						try
+						{
+							if (options.Parents || Directory.GetParent(directory).Exists)
+							{
+								Directory.CreateDirectory(directory);
+								
+								if (options.Verbose)
+								{
+									Console.WriteLine($"mkdir: Creating directory '{directory}'");
+								}
+							}
+							else
+							{
+								Console.WriteLine(
+									$"mkdir: Could not create directory '{directory}': No such file or directory");
+							}
+						}
+						catch (Exception e)
+						{
+							Console.WriteLine($"mkdir: Could not create directory '{directory}': {e.Message}");
+						}
+					}
+				}
 			}
-
-			return null;
+			else
+			{
+				Console.WriteLine(options.GetUsage());
+			}
 		}
 	}
 }

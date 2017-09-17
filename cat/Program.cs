@@ -11,7 +11,7 @@ namespace Khondar.UNIXUtils.Concat
 		{
 			new Program().Run(args);
 		}
-
+		
 		protected override void Run(Options options)
 		{
 			if (options.FileNames.Count > 0)
