@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using CommandLine;
-using CommandLine.Text;
+using Khondar.UNIXUtils.Shared;
 
 namespace Khondar.UNIXUtils.Concat
 {
-	internal class Options
+	internal class Options : BaseOptions
 	{
 		[Option('V', "version", HelpText = "output version information and exit")]
 		public bool Version { get; set; }
@@ -38,12 +38,5 @@ namespace Khondar.UNIXUtils.Concat
 
 		[ValueList(typeof(List<string>))]
 		public List<string> FileNames { get; set; }
-
-		[HelpOption]
-		public string GetUsage()
-		{
-			return HelpText.AutoBuild(this,
-				current => HelpText.DefaultParsingErrorsHandler(this, current));
-		}
 	}
 }

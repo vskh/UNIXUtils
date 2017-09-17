@@ -12,6 +12,13 @@ namespace Khondar.UNIXUtils.Concat
 			var options = ParseOptions(args);
 			if (options != null)
 			{
+				if (options.Version)
+				{
+					var assemblyInfo = typeof(Program).Assembly.GetName();
+					Console.WriteLine(assemblyInfo.Name + " v" + assemblyInfo.Version);
+					return;
+				}				
+				
 				if (options.FileNames.Count > 0)
 				{
 					foreach (var fileName in options.FileNames)
@@ -29,14 +36,9 @@ namespace Khondar.UNIXUtils.Concat
 		private static Options ParseOptions(string[] args)
 		{
 			var options = new Options();
-			if (Parser.Default.ParseArguments(args, options))
+			Parser parser = new Parser(options.ParserSettings);
+			if (parser.ParseArguments(args, options))
 			{
-				if (options.Version)
-				{
-					var assemblyInfo = typeof(Program).Assembly.GetName();
-					Console.WriteLine(assemblyInfo.Name + " v" + assemblyInfo.Version);
-				}
-
 				if (options.NumberNonEmptyLines)
 				{
 					options.NumberAll = true;
